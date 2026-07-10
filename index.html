@@ -2,710 +2,195 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marco Rizzo — Laurea in Economia e Finanza</title>
-<meta name="description" content="Festa di laurea di Marco Rizzo — Economia e Finanza — 24 luglio 2026">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marco — Invito alla mia laurea</title>
+<meta name="description" content="Prima di invitarti alla mia laurea, una piccola missione.">
+
+<!-- Font: coppia editoriale (serif con carattere + sans neutro + mono per i dati) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --white:#ffffff;
-    --ivory:#fbfaf8;
-    --ink:#1a1a1a;
-    --grey:#6b6b6b;
-    --gold:#b8944f;
-    --gold-light:#d8bc84;
-    --gold-dark:#8f6f36;
-    --line:rgba(184,148,79,0.25);
-    --ease:cubic-bezier(.22,1,.36,1);
-  }
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  *{margin:0;padding:0;box-sizing:border-box;}
-
-  html{scroll-behavior:smooth;}
-
-  body{
-    background:var(--white);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    font-weight:400;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-
-  h1,h2,h3,.serif{
-    font-family:'Fraunces',serif;
-    font-weight:500;
-    letter-spacing:-0.01em;
-  }
-
-  a{color:inherit;text-decoration:none;}
-
-  ::selection{background:var(--gold-light);color:var(--ink);}
-
-  /* ===== Gold divider / ornament ===== */
-  .ornament{
-    width:44px;height:44px;margin:0 auto;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .ornament svg{width:100%;height:100%;}
-
-  .eyebrow{
-    font-family:'Inter',sans-serif;
-    font-size:0.72rem;
-    letter-spacing:0.28em;
-    text-transform:uppercase;
-    color:var(--gold-dark);
-    font-weight:600;
-  }
-
-  .divider{
-    width:1px;
-    height:64px;
-    margin:2rem auto;
-    background:linear-gradient(to bottom, transparent, var(--gold), transparent);
-  }
-
-  /* ===== Nav dot progress ===== */
-  .progress-line{
-    position:fixed;
-    top:0;left:0;
-    height:2px;
-    background:linear-gradient(90deg, var(--gold-light), var(--gold));
-    z-index:9999;
-    width:0%;
-    transition:width .1s linear;
-  }
-
-  /* ===== HERO ===== */
-  .hero{
-    min-height:100svh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    position:relative;
-    padding:6rem 1.5rem 4rem;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184,148,79,0.06), transparent 70%),
-      var(--white);
-  }
-
-  .hero-frame{
-    position:absolute;
-    inset:14px;
-    border:1px solid var(--line);
-    pointer-events:none;
-    opacity:0;
-    animation:frameIn 1.4s var(--ease) .3s forwards;
-  }
-  @keyframes frameIn{
-    from{opacity:0; inset:40px;}
-    to{opacity:1; inset:14px;}
-  }
-
-  .hero-kicker{
-    opacity:0;
-    animation:riseIn 1s var(--ease) .5s forwards;
-    margin-bottom:1.6rem;
-  }
-
-  .hero-name{
-    font-size:clamp(2.6rem, 9vw, 6.4rem);
-    line-height:1.02;
-    opacity:0;
-    animation:riseIn 1.1s var(--ease) .7s forwards;
-    background:linear-gradient(180deg, var(--ink) 40%, var(--ink) 60%);
-    -webkit-background-clip:text;
-    background-clip:text;
-  }
-
-  .hero-name .last{
-    display:block;
-    color:var(--gold-dark);
-    background:linear-gradient(120deg, var(--gold-dark), var(--gold-light), var(--gold-dark));
-    background-size:200% auto;
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-    animation: riseIn 1.1s var(--ease) .85s forwards, shimmer 6s linear infinite 2s;
-  }
-
-  @keyframes shimmer{
-    to{background-position:200% center;}
-  }
-
-  .hero-course{
-    margin-top:1.6rem;
-    font-size:clamp(0.95rem, 2vw, 1.15rem);
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--grey);
-    opacity:0;
-    animation:riseIn 1s var(--ease) 1.05s forwards;
-    font-weight:500;
-  }
-
-  .hero-date-row{
-    margin-top:2.6rem;
-    display:flex;
-    align-items:center;
-    gap:1rem;
-    opacity:0;
-    animation:riseIn 1s var(--ease) 1.25s forwards;
-  }
-
-  .hero-date-row .dash{
-    width:28px;height:1px;background:var(--gold);
-  }
-
-  .hero-date{
-    font-family:'Fraunces',serif;
-    font-size:1.05rem;
-    letter-spacing:0.04em;
-    color:var(--ink);
-  }
-
-  @keyframes riseIn{
-    from{opacity:0; transform:translateY(22px);}
-    to{opacity:1; transform:translateY(0);}
-  }
-
-  .scroll-cue{
-    position:absolute;
-    bottom:2.4rem;
-    left:50%;
-    transform:translateX(-50%);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:.6rem;
-    opacity:0;
-    animation:fadeSimple 1s ease 2s forwards;
-  }
-  .scroll-cue span{
-    font-size:0.65rem;
-    letter-spacing:0.2em;
-    text-transform:uppercase;
-    color:var(--grey);
-  }
-  .scroll-line{
-    width:1px;height:38px;
-    background:var(--gold);
-    position:relative;
-    overflow:hidden;
-  }
-  .scroll-line::after{
-    content:'';
-    position:absolute;
-    top:-100%;left:0;
-    width:100%;height:100%;
-    background:var(--ink);
-    animation:scrollDrop 1.8s ease-in-out infinite;
-  }
-  @keyframes scrollDrop{
-    0%{top:-100%;}
-    60%{top:100%;}
-    100%{top:100%;}
-  }
-  @keyframes fadeSimple{to{opacity:1;}}
-
-  /* ===== SECTION generic ===== */
-  section{
-    padding:7rem 1.5rem;
-    position:relative;
-  }
-
-  .section-inner{
-    max-width:880px;
-    margin:0 auto;
-    text-align:center;
-  }
-
-  .reveal{
-    opacity:0;
-    transform:translateY(34px);
-    transition:opacity 1s var(--ease), transform 1s var(--ease);
-  }
-  .reveal.is-visible{
-    opacity:1;
-    transform:translateY(0);
-  }
-  .reveal-delay-1{transition-delay:.1s;}
-  .reveal-delay-2{transition-delay:.22s;}
-  .reveal-delay-3{transition-delay:.34s;}
-
-  /* ===== COUNTDOWN ===== */
-  .countdown-section{
-    background:var(--ivory);
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-  }
-
-  .countdown-title{
-    font-size:clamp(1.4rem,3vw,2rem);
-    margin-bottom:.6rem;
-  }
-
-  .countdown-sub{
-    color:var(--grey);
-    font-size:0.95rem;
-    margin-bottom:3rem;
-  }
-
-  .countdown-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:1.2rem;
-    max-width:640px;
-    margin:0 auto;
-  }
-
-  .count-box{
-    background:var(--white);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:1.6rem 0.6rem;
-    position:relative;
-    overflow:hidden;
-    transition:transform .5s var(--ease), box-shadow .5s var(--ease);
-  }
-  .count-box:hover{
-    transform:translateY(-6px);
-    box-shadow:0 20px 40px -20px rgba(184,148,79,0.35);
-  }
-  .count-box::before{
-    content:'';
-    position:absolute;
-    top:0;left:0;right:0;
-    height:2px;
-    background:linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-
-  .count-num{
-    font-family:'Fraunces',serif;
-    font-size:clamp(1.8rem,5vw,3rem);
-    font-weight:500;
-    color:var(--ink);
-    font-variant-numeric:tabular-nums;
-    line-height:1;
-  }
-  .count-label{
-    margin-top:.5rem;
-    font-size:0.68rem;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    color:var(--grey);
-  }
-
-  /* ===== THESIS SECTION ===== */
-  .thesis-section{
-    background:var(--white);
-  }
-
-  .thesis-card{
-    background:var(--white);
-    border:1px solid var(--line);
-    border-radius:20px;
-    padding:clamp(2.2rem, 6vw, 4rem);
-    position:relative;
-    box-shadow:0 30px 60px -35px rgba(0,0,0,0.12);
-  }
-
-  .thesis-card::before{
-    content:'“';
-    position:absolute;
-    top:-0.4rem;
-    left:1.6rem;
-    font-family:'Fraunces',serif;
-    font-size:5rem;
-    color:var(--gold-light);
-    opacity:0.6;
-    line-height:1;
-  }
-
-  .thesis-title{
-    font-size:clamp(1.15rem, 2.6vw, 1.65rem);
-    line-height:1.45;
-    color:var(--ink);
-    font-weight:500;
-  }
-
-  .thesis-title .accent{
-    color:var(--gold-dark);
-  }
-
-  .thesis-meta{
-    margin-top:2.2rem;
-    display:flex;
-    justify-content:center;
-    gap:2.4rem;
-    flex-wrap:wrap;
-  }
-  .thesis-meta div{
-    text-align:center;
-  }
-  .thesis-meta .m-label{
-    font-size:0.65rem;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    color:var(--grey);
-    margin-bottom:.35rem;
-  }
-  .thesis-meta .m-value{
-    font-family:'Fraunces',serif;
-    font-size:1.05rem;
-  }
-
-  /* ===== LOCATION ===== */
-  .location-section{
-    background:var(--ivory);
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-  }
-
-  .location-title{
-    font-size:clamp(1.6rem,4vw,2.4rem);
-    margin-bottom:0.8rem;
-  }
-
-  .location-sub{
-    color:var(--grey);
-    max-width:520px;
-    margin:0 auto 2.6rem;
-    line-height:1.6;
-  }
-
-  .map-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:0.7rem;
-    background:var(--ink);
-    color:var(--white);
-    padding:1.05rem 2.2rem;
-    border-radius:999px;
-    font-size:0.92rem;
-    letter-spacing:0.03em;
-    font-weight:500;
-    position:relative;
-    overflow:hidden;
-    isolation:isolate;
-    transition:transform .45s var(--ease), box-shadow .45s var(--ease);
-  }
-  .map-btn::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:linear-gradient(120deg, var(--gold-dark), var(--gold-light), var(--gold-dark));
-    background-size:220% auto;
-    z-index:-1;
-    opacity:0;
-    transition:opacity .45s var(--ease);
-  }
-  .map-btn:hover{
-    transform:translateY(-4px);
-    box-shadow:0 18px 34px -14px rgba(184,148,79,0.55);
-  }
-  .map-btn:hover::before{
-    opacity:1;
-    animation:shimmer 3s linear infinite;
-  }
-  .map-btn svg{width:18px;height:18px;flex-shrink:0;}
-
-  .venue-name{
-    margin-top:2rem;
-    font-family:'Fraunces',serif;
-    font-size:1.1rem;
-    color:var(--ink);
-  }
-  .venue-city{
-    font-size:0.85rem;
-    color:var(--grey);
-    margin-top:0.25rem;
-  }
-
-  /* ===== THANKS ===== */
-  .thanks-section{
-    background:var(--white);
-    text-align:center;
-    padding-top:8rem;
-    padding-bottom:8rem;
-  }
-
-  .thanks-eyebrow{
-    margin-bottom:1.6rem;
-  }
-
-  .thanks-title{
-    font-size:clamp(2rem,6vw,3.6rem);
-    line-height:1.15;
-    max-width:820px;
-    margin:0 auto;
-  }
-
-  .thanks-title .g{
-    color:var(--gold-dark);
-    background:linear-gradient(120deg, var(--gold-dark), var(--gold-light), var(--gold-dark));
-    background-size:200% auto;
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-  }
-
-  .thanks-body{
-    max-width:600px;
-    margin:2rem auto 0;
-    color:var(--grey);
-    line-height:1.8;
-    font-size:1.02rem;
-  }
-
-  .signature{
-    margin-top:3.4rem;
-    font-family:'Fraunces',serif;
-    font-style:italic;
-    font-size:1.6rem;
-    color:var(--ink);
-  }
-
-  footer{
-    text-align:center;
-    padding:2.4rem 1.5rem 3rem;
-    color:var(--grey);
-    font-size:0.75rem;
-    letter-spacing:0.05em;
-    border-top:1px solid var(--line);
-  }
-
-  /* ===== Accessibility / reduced motion ===== */
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none !important; transition:none !important;}
-    .reveal{opacity:1; transform:none;}
-  }
-
-  a:focus-visible, button:focus-visible{
-    outline:2px solid var(--gold);
-    outline-offset:3px;
-  }
-
-  @media (max-width:640px){
-    .countdown-grid{gap:.7rem;}
-    .count-box{padding:1.1rem 0.3rem;border-radius:10px;}
-    .thesis-meta{gap:1.4rem;}
-    section{padding:5rem 1.2rem;}
-  }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="progress-line" id="progressLine"></div>
+<!-- Rumore/grain molto leggero per una sensazione "premium", non decorativo a caso -->
+<div class="grain" aria-hidden="true"></div>
 
-<!-- ============ HERO ============ -->
-<header class="hero">
-  <div class="hero-frame" aria-hidden="true"></div>
+<!-- Barra "quotazione tesi": elemento firma, riprende il linguaggio finanziario del percorso di studi -->
+<div class="ledger-bar" aria-hidden="true">
+  <div class="ledger-fill" id="ledgerFill"></div>
+  <span class="ledger-label" id="ledgerLabel">0%</span>
+</div>
 
-  <div class="hero-kicker">
-    <div class="ornament" aria-hidden="true">
-      <svg viewBox="0 0 44 44" fill="none">
-        <circle cx="22" cy="22" r="1.5" fill="#b8944f"/>
-        <path d="M22 4 L22 14 M22 30 L22 40 M4 22 L14 22 M30 22 L40 22" stroke="#b8944f" stroke-width="1"/>
-      </svg>
+<button class="sound-toggle" id="soundToggle" type="button" aria-pressed="true" aria-label="Disattiva audio">
+  <span id="soundIcon">♪</span>
+</button>
+
+<main class="app" id="app">
+
+  <!-- ============ SCHERMATA 1 — L'INCARICO ============ -->
+  <section class="screen screen-intro" id="screenIntro" data-state="active" aria-hidden="false">
+    <div class="screen-inner">
+      <p class="eyebrow">MRC&nbsp;·&nbsp;LAUREA&nbsp;— STATO: IN ATTESA DI APPROVAZIONE</p>
+      <h1 class="display display-xl">
+        Ho bisogno<br><em>del tuo aiuto.</em>
+      </h1>
+      <p class="lede">
+        Prima di riceverti come ospite, un ultimo esame.
+        Niente econometria: stavolta basta un dito e un po' di fiducia.
+      </p>
+      <button class="btn btn-primary" id="startBtn" type="button">
+        Accetto l'incarico
+        <span class="btn-arrow" aria-hidden="true">↓</span>
+      </button>
     </div>
-    <p class="eyebrow" style="margin-top:1rem;">Festa di Laurea</p>
-  </div>
+  </section>
 
-  <h1 class="hero-name">
-    MARCO
-    <span class="last">RIZZO</span>
-  </h1>
-
-  <p class="hero-course">Laurea in Economia e Finanza</p>
-
-  <div class="hero-date-row">
-    <span class="dash" aria-hidden="true"></span>
-    <span class="hero-date">24 Luglio 2026</span>
-    <span class="dash" aria-hidden="true"></span>
-  </div>
-
-  <div class="scroll-cue" aria-hidden="true">
-    <span>Scorri</span>
-    <div class="scroll-line"></div>
-  </div>
-</header>
-
-<!-- ============ COUNTDOWN ============ -->
-<section class="countdown-section">
-  <div class="section-inner">
-    <p class="eyebrow reveal">Il grande giorno si avvicina</p>
-    <div class="divider reveal reveal-delay-1"></div>
-    <h2 class="countdown-title reveal reveal-delay-1">Manca ancora un po'</h2>
-    <p class="countdown-sub reveal reveal-delay-2">Il conto alla rovescia per il 24 luglio 2026</p>
-
-    <div class="countdown-grid reveal reveal-delay-3">
-      <div class="count-box">
-        <div class="count-num" id="cd-days">00</div>
-        <div class="count-label">Giorni</div>
-      </div>
-      <div class="count-box">
-        <div class="count-num" id="cd-hours">00</div>
-        <div class="count-label">Ore</div>
-      </div>
-      <div class="count-box">
-        <div class="count-num" id="cd-mins">00</div>
-        <div class="count-label">Minuti</div>
-      </div>
-      <div class="count-box">
-        <div class="count-num" id="cd-secs">00</div>
-        <div class="count-label">Secondi</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ THESIS ============ -->
-<section class="thesis-section">
-  <div class="section-inner">
-    <p class="eyebrow reveal">La Tesi</p>
-    <div class="divider reveal reveal-delay-1"></div>
-
-    <div class="thesis-card reveal reveal-delay-2">
-      <p class="thesis-title">
-        La tutela costituzionale del <span class="accent">risparmio</span> nell'era della finanza digitale:
-        l'<span class="accent">art. 47 Cost.</span> tra protezione del risparmiatore e innovazione dei mercati
+  <!-- ============ SCHERMATA 2 — LA MISSIONE (drag & drop) ============ -->
+  <section class="screen screen-mission" id="screenMission" data-state="idle" aria-hidden="true">
+    <div class="screen-inner">
+      <p class="eyebrow">FASE 1 DI 1 — VERIFICA SUL CAMPO</p>
+      <h2 class="display display-md">
+        Guadagnati la fiducia di <em id="dogNameInline">Bond</em>.
+      </h2>
+      <p class="lede lede-tight" id="missionHint">
+        Trascina il croccantino fino al muso. È l'esame più facile che sosterrai oggi.
       </p>
 
-      <div class="thesis-meta">
-        <div>
-          <div class="m-label">Candidato</div>
-          <div class="m-value">Marco Rizzo</div>
+      <div class="stage" id="stage">
+        <!-- Zona target: il cane -->
+        <div class="dog-zone" id="dogZone">
+          <div class="dog-frame" id="dogFrame">
+            <img
+              class="dog-photo"
+              id="dogImg"
+              src="dog.jpg"
+              alt="Bond, il mio cane, in attesa fiduciosa"
+              draggable="false"
+            >
+            <!-- Fallback elegante in caso dog.jpg non sia stato ancora caricato -->
+            <svg class="dog-fallback" id="dogFallback" viewBox="0 0 200 200" role="img" aria-label="Illustrazione di un cane seduto">
+              <circle cx="100" cy="100" r="98" class="dog-fallback-bg"/>
+              <g class="dog-fallback-lines" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M60 150c0-30 15-45 40-45s40 15 40 45"/>
+                <ellipse cx="100" cy="95" rx="34" ry="30"/>
+                <path d="M72 74c-6-14-2-26 6-30 6 10 6 20 4 30"/>
+                <path d="M128 74c6-14 2-26-6-30-6 10-6 20-4 30"/>
+                <circle cx="88" cy="92" r="2.4" fill="currentColor" stroke="none"/>
+                <circle cx="112" cy="92" r="2.4" fill="currentColor" stroke="none"/>
+                <path id="dogMouthPath" d="M92 108q8 6 16 0" />
+                <circle cx="100" cy="100" r="3" fill="currentColor" stroke="none" opacity=".0001"/>
+              </g>
+            </svg>
+          </div>
+          <!-- Punto di arrivo invisibile usato per calcolare il "successo" -->
+          <div class="drop-target" id="dropTarget" aria-hidden="true"></div>
         </div>
-        <div>
-          <div class="m-label">Corso di Laurea</div>
-          <div class="m-value">Economia e Finanza</div>
+
+        <!-- Croccantino trascinabile -->
+        <div
+          class="treat"
+          id="treat"
+          role="button"
+          tabindex="0"
+          aria-label="Croccantino. Trascina fino al cane, oppure premi Invio per lanciarlo automaticamente."
+        >
+          <img
+            class="treat-photo"
+            id="treatImg"
+            src="treat.png"
+            alt=""
+            draggable="false"
+          >
+          <svg class="treat-fallback" id="treatFallback" viewBox="0 0 60 60" role="presentation">
+            <path class="treat-shape" d="M30 6c9 0 15 7 15 15 0 3-1 5-3 7 2 2 3 4 3 7 0 8-6 15-15 15S15 43 15 35c0-3 1-5 3-7-2-2-3-4-3-7 0-8 6-15 15-15Z"/>
+            <circle cx="24" cy="24" r="1.6" class="treat-dot"/>
+            <circle cx="36" cy="26" r="1.6" class="treat-dot"/>
+            <circle cx="30" cy="36" r="1.6" class="treat-dot"/>
+          </svg>
         </div>
       </div>
+
+      <p class="mission-caption" id="missionCaption">Trascina&nbsp;→</p>
     </div>
-  </div>
-</section>
 
-<!-- ============ LOCATION ============ -->
-<section class="location-section">
-  <div class="section-inner">
-    <p class="eyebrow reveal">Dove festeggiare</p>
-    <div class="divider reveal reveal-delay-1"></div>
-    <h2 class="location-title reveal reveal-delay-1">Vi aspetto per festeggiare insieme</h2>
-    <p class="location-sub reveal reveal-delay-2">
-      Un luogo suggestivo affacciato sul mare, cornice perfetta per un giorno importante.
-    </p>
+    <!-- Livello dei coriandoli, sopra tutto -->
+    <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+  </section>
 
-    <a
-      class="map-btn reveal reveal-delay-3"
-      href="https://www.google.com/maps/search/?api=1&query=Torre+Chianchizza+Monopoli"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Apri Torre Chianchizza a Monopoli su Google Maps"
-    >
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 10c0 6-9 13-9 13s-9-7-9-13a9 9 0 0 1 18 0Z"></path>
-        <circle cx="12" cy="10" r="3"></circle>
-      </svg>
-      Apri su Google Maps
-    </a>
+  <!-- ============ SCHERMATA 3 — IL REVEAL ============ -->
+  <section class="screen screen-reveal" id="screenReveal" data-state="idle" aria-hidden="true">
+    <div class="screen-inner screen-inner-wide">
 
-    <p class="venue-name reveal reveal-delay-3">Torre Chianchizza</p>
-    <p class="venue-city reveal reveal-delay-3">Monopoli, Puglia</p>
-  </div>
-</section>
+      <p class="eyebrow eyebrow-gold">🎓 MISSIONE COMPLETATA</p>
+      <h2 class="display display-lg">
+        Sei ufficialmente<br><em>invitato.</em>
+      </h2>
+      <p class="lede" id="revealLede">
+        Bond ha dato l'approvazione. Ora tocca a te.
+      </p>
 
-<!-- ============ THANKS ============ -->
-<section class="thanks-section">
-  <div class="section-inner">
-    <p class="eyebrow thanks-eyebrow reveal">Un grazie di cuore</p>
-    <h2 class="thanks-title reveal reveal-delay-1">
-      Grazie a chi c'è sempre stato, <span class="g">e a chi ci sarà quel giorno.</span>
-    </h2>
-    <p class="thanks-body reveal reveal-delay-2">
-      Questo traguardo porta con sé lo studio, la pazienza e il sostegno di tante persone speciali.
-      Non vedo l'ora di condividere questo momento con voi, brindando insieme a un nuovo inizio.
-    </p>
-    <p class="signature reveal reveal-delay-3">Con affetto, Marco</p>
-  </div>
-</section>
+      <!-- Mini "report trimestrale" ironico — coerente con Economia e Finanza -->
+      <div class="report-grid" id="reportGrid">
+        <div class="report-card">
+          <p class="report-label">RISK ASSESSMENT</p>
+          <p class="report-value">Probabilità che mi laureassi: inferiore a quella che <span id="dogNameInline2">Bond</span> rifiutasse un croccantino.</p>
+        </div>
+        <div class="report-card">
+          <p class="report-label">PERFORMANCE</p>
+          <p class="report-value"><span id="degreeInline">Economia e Finanza</span>: completata. Sopravvivenza universitaria: <strong>100%</strong>.</p>
+        </div>
+        <div class="report-card">
+          <p class="report-label">STATUS</p>
+          <p class="report-value">Achievement unlocked: <strong>Laurea ottenuta.</strong></p>
+        </div>
+      </div>
 
-<footer>
-  Marco Rizzo &middot; Economia e Finanza &middot; 24.07.2026
-</footer>
+      <!-- Dettagli evento -->
+      <div class="details-card" id="detailsCard">
+        <div class="details-row">
+          <span class="details-label">Data</span>
+          <span class="details-value" id="detailDate">—</span>
+        </div>
+        <div class="details-row">
+          <span class="details-label">Ora</span>
+          <span class="details-value" id="detailTime">—</span>
+        </div>
+        <div class="details-row">
+          <span class="details-label">Luogo</span>
+          <span class="details-value" id="detailVenue">—</span>
+        </div>
+        <div class="details-row">
+          <span class="details-label">Indirizzo</span>
+          <span class="details-value">
+            <a class="maps-link" id="detailMapsLink" href="#" target="_blank" rel="noopener">
+              <span id="detailAddress">—</span>
+              <span class="maps-arrow" aria-hidden="true">↗</span>
+            </a>
+          </span>
+        </div>
+        <div class="details-row" id="detailDressRow">
+          <span class="details-label">Dress code</span>
+          <span class="details-value" id="detailDress">—</span>
+        </div>
+      </div>
 
-<script>
-(function(){
-  "use strict";
+      <div class="cta-group">
+        <a class="btn btn-primary btn-large" id="whatsappBtn" href="#" target="_blank" rel="noopener">
+          Conferma la presenza
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+        <button class="btn-text" id="calendarBtn" type="button">Aggiungi al calendario</button>
+      </div>
 
-  /* ---------- Scroll progress bar ---------- */
-  const progressLine = document.getElementById('progressLine');
-  function updateProgress(){
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    progressLine.style.width = pct + '%';
-  }
-  window.addEventListener('scroll', updateProgress, { passive:true });
-  updateProgress();
+      <p class="footnote">Nessun croccantino è stato danneggiato durante la creazione di questo invito.</p>
+    </div>
+  </section>
 
-  /* ---------- Reveal on scroll ---------- */
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('is-visible');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
-  revealEls.forEach(el=>io.observe(el));
+</main>
 
-  /* ---------- Countdown ---------- */
-  const targetDate = new Date('2026-07-24T18:00:00+02:00').getTime();
-
-  const daysEl = document.getElementById('cd-days');
-  const hoursEl = document.getElementById('cd-hours');
-  const minsEl = document.getElementById('cd-secs') && document.getElementById('cd-mins');
-  const secsEl = document.getElementById('cd-secs');
-
-  function pad(n){ return String(n).padStart(2,'0'); }
-
-  function tick(){
-    const now = Date.now();
-    let diff = targetDate - now;
-
-    if(diff <= 0){
-      daysEl.textContent = '00';
-      hoursEl.textContent = '00';
-      minsEl.textContent = '00';
-      secsEl.textContent = '00';
-      return;
-    }
-
-    const d = Math.floor(diff / (1000*60*60*24));
-    diff -= d * (1000*60*60*24);
-    const h = Math.floor(diff / (1000*60*60));
-    diff -= h * (1000*60*60);
-    const m = Math.floor(diff / (1000*60));
-    diff -= m * (1000*60);
-    const s = Math.floor(diff / 1000);
-
-    daysEl.textContent = pad(d);
-    hoursEl.textContent = pad(h);
-    minsEl.textContent = pad(m);
-    secsEl.textContent = pad(s);
-  }
-
-  tick();
-  setInterval(tick, 1000);
-
-})();
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
