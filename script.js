@@ -10,22 +10,22 @@
  * ---------------------------------------------------------------------- */
 const CONFIG = {
   name: "Marco",
-  dogName: "Bond",                       // nome del cane, usato nei testi
+  dogName: "Remì",                       // nome del cane, usato nei testi
   degree: "Economia e Finanza",
 
   // Evento
-  date: "12 settembre 2026",             // testo libero, es. "12 settembre 2026"
-  time: "11:30",
-  venueName: "Aula Magna — Università Bocconi",
-  address: "Via Röntgen 1, 20136 Milano MI",
-  mapsUrl: "https://maps.google.com/?q=Universit%C3%A0+Bocconi+Milano",
-  dressCode: "Elegante ma vivibile: niente tacchi a spillo sul prato.", // lascia "" per nasconderlo
+  date: "24 Luglio 2026",             // testo libero, es. "12 settembre 2026"
+  time: "20.00",
+  venueName: "Tenuta Chianchizza",
+  address: "Contrada Chianchizza, 504, 70043 Monopoli BA",
+  mapsUrl: "https://maps.app.goo.gl/mPEdHNjMbMueHxVH6",
+  dressCode: "", // lascia "" per nasconderlo
 
   // Conferma presenza via WhatsApp.
   // Numero in formato internazionale senza "+" (es. "393331234567").
   // Se lasciato vuoto, il pulsante apre comunque WhatsApp con il testo pronto,
   // senza destinatario preimpostato.
-  whatsappNumber: "",
+  whatsappNumber: "+393313085954",
   whatsappMessage:
     "Ci sarò! 🎓 Non vedo l'ora di festeggiare la laurea in {degree} di {name}, il {date}.",
 
