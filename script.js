@@ -322,7 +322,7 @@ function completeMission() {
   treat.style.transform = "scale(.4)";
 
   dogFrame.classList.add("is-happy");
-  missionCaption.textContent = "Bravo. Bond approva.";
+  missionCaption.textContent = "Bravo. Remì approva.";
   missionCaption.dataset.success = "true";
 
   setLedger(100);
