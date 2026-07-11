@@ -1,0 +1,613 @@
+/* ==========================================================================
+   INVITO DI LAUREA — MARCO
+   Palette: multicolor coordinata (viola, rosa, arancio, giallo, verde acqua)
+   Type: Baloo 2 (display, tondo e giocoso) + Nunito (corpo) + JetBrains Mono (dati)
+   ========================================================================== */
+
+:root{
+  /* ---- base neutra: resta chiara per far risaltare i colori sopra ---- */
+  --bg:            #FFFBF5;
+  --bg-raised:     #FFFFFF;
+  --ink:           #221B3A;
+  --ink-soft:      #5B5473;
+  --muted:         #9691A8;
+  --line:          #EFE7DA;
+  --line-strong:   #E1D6C4;
+  --ink-invert:    #FFFBF5;
+
+  /* ---- palette multicolor coordinata: 5 accenti vivaci, ciascuno con un ruolo ---- */
+  --purple:        #7B5CFA;  /* colore guida — titoli, elementi principali */
+  --purple-deep:   #5E3FE0;
+  --purple-tint:   #EAE4FF;
+
+  --pink:          #FF4D8D;  /* energia — bottone principale, focus */
+  --pink-deep:     #E22C6E;
+  --pink-tint:     #FFE2ED;
+
+  --orange:        #FF8C42;  /* calore — dettagli, hover */
+  --orange-deep:   #E96F1F;
+  --orange-tint:   #FFE9D6;
+
+  --yellow:        #FFD23F;  /* celebrazione — croccantino, coriandoli */
+  --yellow-deep:   #E8B400;
+  --yellow-tint:   #FFF6D6;
+
+  --teal:          #2EC4B6;  /* freschezza — sfondo cane, link */
+  --teal-deep:     #1BA396;
+  --teal-tint:     #DBF6F3;
+
+  /* alias retro-compatibili usati in alcune regole più sotto */
+  --sage:          var(--pink);
+  --sage-deep:     var(--pink-deep);
+  --sage-tint:     var(--pink-tint);
+  --gold:          var(--yellow);
+  --gold-deep:     var(--yellow-deep);
+  --gold-tint:     var(--yellow-tint);
+  --azzurro:       var(--teal);
+  --azzurro-deep:  var(--teal-deep);
+  --azzurro-tint:  var(--teal-tint);
+
+  /* ---- tipografia: rotonda e giocosa ---- */
+  --font-display: 'Baloo 2', 'Nunito', -apple-system, sans-serif;
+  --font-body:    'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+
+  /* ---- ritmo: morbido e arrotondato ---- */
+  --radius-s:  14px;
+  --radius-m:  22px;
+  --radius-l:  32px;
+  --shadow-soft: 0 2px 4px rgba(34,27,58,.06), 0 10px 26px rgba(123,92,250,.12);
+  --shadow-lift: 0 4px 10px rgba(34,27,58,.10), 0 18px 44px rgba(123,92,250,.20);
+
+  --ease-out: cubic-bezier(.16,1,.3,1);
+  --ease-spring: cubic-bezier(.34,1.76,.64,1); /* rimbalzo marcato */
+
+  color-scheme: light;
+}
+
+/* ---------------------------------------------------------------------- */
+/* RESET DI BASE                                                          */
+/* ---------------------------------------------------------------------- */
+*, *::before, *::after{ box-sizing: border-box; }
+html{ -webkit-text-size-adjust: 100%; }
+html, body{ height: 100%; }
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+}
+img{ max-width: 100%; display: block; }
+button{ font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+a{ color: inherit; }
+h1, h2, p, ul{ margin: 0; }
+
+/* Focus visibile e leggibile per accessibilità da tastiera */
+:focus-visible{
+  outline: 2px solid var(--purple-deep);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Rispetta la preferenza di ridurre le animazioni */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* GRAIN — texture leggerissima, resta anche in versione più colorata     */
+/* ---------------------------------------------------------------------- */
+.grain{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: .03;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------------------------------------------------------------------- */
+/* BARRA DI AVANZAMENTO — ora multicolore, segue tutta la palette         */
+/* ---------------------------------------------------------------------- */
+.ledger-bar{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: var(--line);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+}
+.ledger-fill{
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,
+    var(--purple), var(--pink), var(--orange), var(--yellow));
+  transition: width .5s var(--ease-out);
+}
+.ledger-label{
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+[data-progress-visible="true"] .ledger-label{ opacity: 1; }
+
+/* ---------------------------------------------------------------------- */
+/* TOGGLE AUDIO                                                            */
+/* ---------------------------------------------------------------------- */
+.sound-toggle{
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 40;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--bg-raised);
+  border: 2px solid var(--line);
+  color: var(--purple-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  box-shadow: var(--shadow-soft);
+  transition: transform .2s var(--ease-spring), color .2s ease;
+}
+.sound-toggle:hover{ transform: translateY(-1px) scale(1.08) rotate(-6deg); }
+.sound-toggle[aria-pressed="false"]{ color: var(--muted); opacity: .55; }
+
+/* ---------------------------------------------------------------------- */
+/* LAYOUT GENERALE — un solo "schermo" visibile alla volta                */
+/* ---------------------------------------------------------------------- */
+.app{
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+.screen{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 96px 24px 56px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: opacity .6s var(--ease-out), transform .6s var(--ease-out), visibility 0s linear .6s;
+  overflow-y: auto;
+}
+.screen[data-state="active"]{
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity .6s var(--ease-out), transform .6s var(--ease-out);
+}
+.screen[data-state="leaving"]{
+  opacity: 0;
+  transform: translateY(-14px);
+}
+
+/* Piccola scossa dello schermo al momento del successo — via JS aggiungiamo
+   questa classe per una frazione di secondo */
+.app.is-celebrating{ animation: screen-shake .5s var(--ease-out); }
+@keyframes screen-shake{
+  0%, 100%{ transform: translate(0,0); }
+  15%{ transform: translate(-6px, 2px) rotate(-0.4deg); }
+  30%{ transform: translate(5px, -3px) rotate(0.4deg); }
+  45%{ transform: translate(-4px, 3px) rotate(-0.3deg); }
+  60%{ transform: translate(4px, -2px) rotate(0.3deg); }
+  75%{ transform: translate(-2px, 1px) rotate(0deg); }
+}
+
+.screen-inner{
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  margin: 0 auto;
+}
+.screen-inner-wide{ max-width: 560px; }
+
+/* ---------------------------------------------------------------------- */
+/* TIPOGRAFIA                                                              */
+/* ---------------------------------------------------------------------- */
+.eyebrow{
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: var(--ink-invert);
+  background: var(--purple);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 22px;
+}
+.eyebrow-gold{ background: var(--yellow); color: var(--ink); }
+
+.display{
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.display em{
+  font-style: normal;
+  font-weight: 700;
+  color: var(--pink-deep);
+}
+.display-xl{ font-size: clamp(2.5rem, 9.5vw, 3.8rem); line-height: 1.05; }
+.display-lg{ font-size: clamp(2.2rem, 8vw, 3.2rem); line-height: 1.06; margin-bottom: 14px; }
+.display-md{ font-size: clamp(1.6rem, 6.5vw, 2.2rem); line-height: 1.15; margin-bottom: 10px; }
+
+/* Comparsa con rimbalzo per il titolo del reveal: l'entrata più "vistosa" */
+#revealTitle{
+  animation: title-bounce-in .7s var(--ease-spring) both;
+}
+@keyframes title-bounce-in{
+  0%{ opacity: 0; transform: scale(.4) rotate(-8deg); }
+  60%{ opacity: 1; transform: scale(1.08) rotate(2deg); }
+  100%{ opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.lede{
+  margin-top: 18px;
+  font-size: 1.08rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 40ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.lede-tight{ margin-top: 8px; font-size: 1rem; }
+
+.footnote{
+  margin-top: 26px;
+  font-size: .82rem;
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------------------- */
+/* BOTTONI                                                                 */
+/* ---------------------------------------------------------------------- */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: .98rem;
+  padding: 15px 28px;
+  min-height: 52px;
+  transition: transform .25s var(--ease-spring), box-shadow .25s ease, background .25s ease;
+}
+.btn-primary{
+  background: var(--pink);
+  color: #fff;
+  box-shadow: var(--shadow-soft);
+  margin-top: 34px;
+}
+.btn-primary:hover{
+  background: var(--purple);
+  transform: translateY(-3px) rotate(-1.5deg) scale(1.02);
+  box-shadow: var(--shadow-lift);
+}
+.btn-primary:active{ transform: translateY(0) scale(.96) rotate(0deg); }
+.btn-large{ padding: 17px 32px; font-size: 1.05rem; width: 100%; max-width: 340px; }
+.btn-arrow{ transition: transform .25s var(--ease-out); }
+.btn-primary:hover .btn-arrow{ transform: translateX(3px); }
+
+.btn-text{
+  margin-top: 14px;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--teal-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--teal-tint);
+}
+.btn-text:hover{ color: var(--purple-deep); text-decoration-color: var(--purple-tint); }
+
+.cta-group{
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---------------------------------------------------------------------- */
+/* SCHERMATA MISSIONE — palco di gioco                                    */
+/* ---------------------------------------------------------------------- */
+.mission-caption{
+  margin-top: 22px;
+  font-family: var(--font-mono);
+  font-size: .84rem;
+  letter-spacing: .04em;
+  color: var(--muted);
+  transition: color .3s ease, opacity .3s ease;
+}
+.mission-caption[data-success="true"]{ color: var(--pink-deep); font-weight: 700; }
+
+.stage{
+  position: relative;
+  width: 100%;
+  height: min(46vh, 340px);
+  min-height: 240px;
+  margin-top: 8px;
+  touch-action: none; /* consente al nostro drag via Pointer Events di gestire il tocco senza scroll */
+  user-select: none;
+}
+
+.dog-zone{
+  position: absolute;
+  right: 6%;
+  bottom: 8%;
+  width: 46%;
+  max-width: 190px;
+  aspect-ratio: 1;
+}
+.dog-frame{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--teal-tint);
+  border: 4px solid var(--bg-raised);
+  outline: 3px solid var(--teal);
+  box-shadow: var(--shadow-soft);
+  transition: transform .4s var(--ease-spring);
+}
+.dog-frame.is-happy{ transform: scale(1.22) rotate(-5deg); }
+
+.dog-photo{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+/* Se dog.jpg non è presente, l'onerror in JS nasconde <img> e mostra questo SVG */
+.dog-fallback{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: none;
+  color: var(--teal-deep);
+}
+.dog-fallback-bg{ fill: var(--teal-tint); }
+
+/* Punto invisibile che definisce l'area di "successo" per il drop */
+.drop-target{
+  position: absolute;
+  left: 18%;
+  top: 40%;
+  width: 30%;
+  height: 30%;
+  pointer-events: none;
+}
+
+.treat{
+  position: absolute;
+  left: 6%;
+  bottom: 14%;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--bg-raised);
+  border: 3px solid var(--yellow);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  touch-action: none;
+  will-change: transform;
+  animation: treat-invite 2s ease-in-out infinite;
+}
+.treat:active{ cursor: grabbing; }
+.treat.is-dragging{
+  animation: none;
+  box-shadow: var(--shadow-lift);
+  cursor: grabbing;
+}
+.treat.is-locked{ animation: none; }
+
+.treat-photo{
+  width: 62%; height: 62%;
+  object-fit: contain;
+  pointer-events: none;
+}
+.treat-fallback{
+  width: 60%; height: 60%;
+  display: none;
+  color: var(--yellow-deep);
+  pointer-events: none;
+}
+.treat-shape{ fill: var(--yellow-tint); stroke: var(--yellow-deep); stroke-width: 2; }
+.treat-dot{ fill: var(--yellow-deep); opacity: .6; }
+
+/* invito al gesto, vivace: dondolio e leggero salto */
+@keyframes treat-invite{
+  0%, 100%{ transform: translate(0,0) rotate(0deg) scale(1); }
+  25%{ transform: translate(2px,-9px) rotate(-10deg) scale(1.06); }
+  50%{ transform: translate(0,-3px) rotate(0deg) scale(1); }
+  75%{ transform: translate(-2px,-9px) rotate(10deg) scale(1.06); }
+}
+
+/* ---------------------------------------------------------------------- */
+/* CORIANDOLI — ora a schermo intero, grandi e numerosi                   */
+/* ---------------------------------------------------------------------- */
+.confetti-layer{
+  position: fixed;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 90;
+}
+.confetto{
+  position: absolute;
+  top: 0; left: 0;
+  width: var(--size, 10px);
+  height: var(--size, 10px);
+  background: var(--confetto-color, var(--yellow));
+  border-radius: var(--confetto-radius, 3px);
+  opacity: 0;
+  animation: confetto-burst var(--dur, 1.4s) var(--ease-out) forwards;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes confetto-burst{
+  0%{
+    opacity: 0;
+    transform: translate(0,0) rotate(0deg) scale(.5);
+  }
+  10%{ opacity: 1; }
+  100%{
+    opacity: 0;
+    transform:
+      translate(var(--tx, 40px), var(--ty, -80px))
+      rotate(var(--rot, 180deg))
+      scale(1);
+  }
+}
+
+/* Flash colorato che pulsa dietro il contenuto al momento del successo */
+.celebration-flash{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 45%,
+    var(--yellow-tint) 0%, var(--pink-tint) 35%, transparent 70%);
+}
+.celebration-flash.is-active{
+  animation: flash-pulse .9s var(--ease-out);
+}
+@keyframes flash-pulse{
+  0%{ opacity: 0; transform: scale(.7); }
+  35%{ opacity: 1; transform: scale(1.1); }
+  100%{ opacity: 0; transform: scale(1.4); }
+}
+
+/* ---------------------------------------------------------------------- */
+/* LISTA DI CELEBRAZIONE — riepilogo breve e diretto, niente giri di parole */
+/* ---------------------------------------------------------------------- */
+.celebration-list{
+  margin-top: 28px;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+.celebration-list li{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-raised);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 14px 18px;
+  font-size: 1.02rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-soft);
+  transition: transform .3s var(--ease-spring), box-shadow .3s ease, border-color .3s ease;
+}
+.celebration-list li:nth-child(1){ border-color: var(--purple-tint); }
+.celebration-list li:nth-child(2){ border-color: var(--pink-tint); }
+.celebration-list li:nth-child(3){ border-color: var(--yellow-tint); }
+.celebration-list li:hover{
+  transform: translateY(-3px) scale(1.015);
+  box-shadow: var(--shadow-lift);
+}
+.celebration-emoji{
+  font-size: 1.3rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------------- */
+/* DETTAGLI EVENTO                                                        */
+/* ---------------------------------------------------------------------- */
+.details-card{
+  margin-top: 18px;
+  background: var(--bg-raised);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 8px 22px;
+  box-shadow: var(--shadow-lift);
+  text-align: left;
+}
+.details-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.details-row:last-child{ border-bottom: 0; }
+.details-label{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.details-value{
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-align: right;
+  color: var(--ink);
+}
+.maps-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: var(--teal-deep);
+  border-bottom: 2px solid var(--teal);
+}
+.maps-arrow{ font-size: .85em; }
+
+/* ---------------------------------------------------------------------- */
+/* RESPONSIVE — regolazioni per schermi più larghi                        */
+/* ---------------------------------------------------------------------- */
+@media (min-width: 640px){
+  .screen{ padding: 64px 24px; }
+  .details-value{ font-size: 1.1rem; }
+}
+
+@media (min-width: 900px){
+  .display-xl{ font-size: 4.4rem; }
+  .stage{ height: 380px; }
+}
+
+/* Schermi molto bassi (landscape su telefono) */
+@media (max-height: 560px){
+  .screen{ padding: 76px 24px 40px; align-items: flex-start; }
+  .stage{ height: 220px; }
+}
